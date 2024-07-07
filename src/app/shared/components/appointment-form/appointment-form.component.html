@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSubmit()" #appointmentForm="ngForm">
+  <label for="title">Title</label>
+  <input type="text" id="title" [(ngModel)]="appointment.title" name="title" required>
+  
+  <label for="date">Date</label>
+  <input type="date" id="date" [(ngModel)]="appointment.date" name="date" required>
+  
+  <button type="submit" [disabled]="!appointmentForm.form.valid">Add Appointment</button>
+</form>
