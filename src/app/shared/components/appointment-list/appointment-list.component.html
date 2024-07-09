@@ -1,36 +1,6 @@
-<!-- appointment-list.component.html -->
-<!-- <div class="appointment-list">
-    <app-appointment-form></app-appointment-form>
-    
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let appointment of appointments$ | async" cdkDrag>
-        <span>{{ appointment.title }} - {{ appointment.date }}</span>
-        <button (click)="deleteAppointment(appointment.id)">Delete</button>
-      </div>
-    </div>
-  </div>
-   -->
 
-   <!-- appointment-list.component.html -->
-<!-- <div class="appointment-list mat-elevation-z8">
-  <app-appointment-form></app-appointment-form>
-
-  <div cdkDropList (cdkDropListDropped)="drop($event)" class="list-container" [cdkDropListConnectedTo]="['appointmentList']">
-    <div *ngFor="let appointment of appointments$ | async" cdkDrag class="appointment-item">
-      <div class="appointment-content">
-        <span>{{ appointment.title }}</span>
-        <span>{{ appointment.date }}</span>
-      </div>
-      <button mat-icon-button color="warn" (click)="deleteAppointment(appointment.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-  </div>
-</div> -->
-
-<!-- appointment-list.component.html -->
-<!-- appointment-list.component.html -->
 <div class="appointment-list mat-elevation-z8">
+  <app-calender></app-calender>
   <app-appointment-form></app-appointment-form>
 
   <div cdkDropList (cdkDropListDropped)="drop($event)" class="list-container" [cdkDropListConnectedTo]="['appointmentList']">
