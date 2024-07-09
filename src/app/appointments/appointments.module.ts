@@ -5,7 +5,7 @@ import { AppointmentFormComponent } from '../shared/components/appointment-form/
 import { AppointmentListComponent } from '../shared/components/appointment-list/appointment-list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
-import { CalenderComponent } from '../shared/components/calender/calender.component'; // Corrected import
+import { CalendarComponent } from '../shared/components/calender/calender.component'; // Corrected import
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
@@ -17,7 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   declarations: [
     AppointmentFormComponent,
     AppointmentListComponent,
-    CalenderComponent
+    CalendarComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
   exports: [
     AppointmentFormComponent,
-    CalenderComponent // Added comma here
+    CalendarComponent // Added comma here
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-US' } // Example locale provider
