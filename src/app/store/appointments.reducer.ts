@@ -1,7 +1,7 @@
-// appointments.reducer.ts
+
 import { createReducer, on } from '@ngrx/store';
 import { Appointment } from '../shared/models/appointment.model';
-import { loadAppointmentsSuccess, addAppointment, deleteAppointment } from './appointments.actions';
+import { loadAppointmentsSuccess, addAppointment, deleteAppointment, updateAppointmentsOrder } from './appointments.actions';
 
 export interface State {
   appointments: Appointment[];
@@ -18,5 +18,6 @@ export const appointmentsReducer = createReducer(
   on(deleteAppointment, (state, { id }) => ({
     ...state,
     appointments: state.appointments.filter(app => app.id !== id)
-  }))
+  })),
+  on(updateAppointmentsOrder, (state, { appointments }) => ({ ...state, appointments }))
 );
