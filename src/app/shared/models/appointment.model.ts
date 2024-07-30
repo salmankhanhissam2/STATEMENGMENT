@@ -2,10 +2,5 @@
 export interface Appointment {
   id: number;
   title: string;
-  date: string;
+  dateTime: string; // Use ISO 8601 string for date and time
 }
-
-// export interface Appointment {
-//   title: string;
-//   date: string; // This is assumed to be a string
-// }

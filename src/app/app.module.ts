@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { appointmentsReducer } from './store/appointments.reducer';
 import { AppointmentsEffects } from './store/appointments.effects';
-import { AppointmentsModule } from './appointments/appointments.module';
+import { shareModule } from './sharemodule/appointments.module';
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import { AppointmentsModule } from './appointments/appointments.module';
       maxAge: 25,
       logOnly: false,
     }),
-    AppointmentsModule
+    shareModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,3 @@
-
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,7 +7,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class CalendarComponent {
   selectedDate: Date | undefined;
-  selected: Date | null = null;  // Add this line
+  selected: Date | null = null;
   @Output() dateSelected = new EventEmitter<Date>();
 
   onDateSelected(date: Date): void {

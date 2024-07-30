@@ -54,11 +54,12 @@ export class AppointmentListComponent implements OnInit {
     if (this.selectedDate) {
       const selectedDateString = this.selectedDate.toISOString().split('T')[0];
       this.filteredAppointments = this.allAppointments.filter(appointment => {
-        const appointmentDate = new Date(appointment.date).toISOString().split('T')[0];
-        return appointmentDate === selectedDateString;
+        const appointmentDateString = new Date(appointment.dateTime).toISOString().split('T')[0];
+        return appointmentDateString === selectedDateString;
       });
     } else {
       this.filteredAppointments = this.allAppointments;
     }
   }
+  
 }

@@ -18,7 +18,8 @@ export class AppointmentFormComponent implements OnInit {
   ngOnInit(): void {
     this.appointmentForm = this.fb.group({
       title: ['', Validators.required],
-      date: ['', [Validators.required, this.dateValidator]]
+      date: ['', [Validators.required]],
+      time: ['', [Validators.required]]
     });
   }
 
@@ -29,11 +30,16 @@ export class AppointmentFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.appointmentForm.valid) {
+      const date = this.appointmentForm.value.date;
+      const time = this.appointmentForm.value.time;
+      const dateTimeString = `${date}T${time}:00`; // Combine date and time into ISO 8601 format
+
       const newAppointment: Appointment = { 
         id: Date.now(), 
         title: this.appointmentForm.value.title, 
-        date: new Date(this.appointmentForm.value.date).toISOString() 
+        dateTime: new Date(dateTimeString).toISOString() 
       };
+
       this.store.dispatch(AppointmentsActions.addAppointment({ appointment: newAppointment }));
       this.appointmentForm.reset();
     }

@@ -38,4 +38,4 @@ import { ReactiveFormsModule } from '@angular/forms';
     { provide: MAT_DATE_LOCALE, useValue: 'en-US' } // Example locale provider
   ],
 })
-export class AppointmentsModule { }
+export class shareModule { }
