@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppointmentFormComponent,
@@ -24,7 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     DragDropModule,
     MatIconModule,
-    MatDatepickerModule,
+    MatDatepickerModule,ReactiveFormsModule,
     MatCardModule,
     MatNativeDateModule,
     MatFormFieldModule, // Include MatFormFieldModule here

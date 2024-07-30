@@ -1,10 +1,9 @@
-
- <div class="appointment-list mat-elevation-z8">
+<div class="appointment-list mat-elevation-z8">
   <app-calendar (dateSelected)="onDateSelected($event)"></app-calendar>
   <app-appointment-form></app-appointment-form>
 
-  <div cdkDropList (cdkDropListDropped)="drop($event)" class="list-container">
-    <div *ngFor="let appointment of appointments$ | async" cdkDrag class="appointment-item">
+  <div cdkDropList (cdkDropListDropped)="drop($event)" class="list-container" [cdkDropListConnectedTo]="['appointmentList']">
+    <div *ngFor="let appointment of filteredAppointments" cdkDrag class="appointment-item">
       <div class="appointment-content">
         <span>{{ appointment.title }}</span>
         <span>{{ appointment.date | date: 'medium' }}</span>

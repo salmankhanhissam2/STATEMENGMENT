@@ -1,9 +1,8 @@
-
 <div class="container">
   <mat-card class="demo-inline-calendar-card">
-    <mat-calendar [(selected)]="selected" (selectedChange)="onDateSelected($event)"></mat-calendar>
+    <mat-calendar [(selected)]="selectedDate" (selectedChange)="onDateSelected($event)"></mat-calendar>
     <mat-card-content>
-      <p>Selected date: {{selected | date: 'mediumDate'}}</p>
+      <p>Selected date: {{selectedDate | date: 'mediumDate'}}</p>
     </mat-card-content>
   </mat-card>
 </div>

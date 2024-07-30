@@ -1,10 +1,16 @@
-
-<form (ngSubmit)="onSubmit()" #appointmentForm="ngForm">
+<form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
   <label for="title">Title</label>
-  <input type="text" id="title" [(ngModel)]="appointment.title" name="title" required>
+  <input type="text" id="title" formControlName="title">
+  <div *ngIf="appointmentForm.get('title')?.invalid && appointmentForm.get('title')?.touched">
+    <small class="error">Title is required</small>
+  </div>
   
   <label for="date">Date</label>
-  <input type="date" id="date" [(ngModel)]="appointment.date" name="date" required>
+  <input type="date" id="date" formControlName="date">
+  <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched">
+    <small class="error" *ngIf="appointmentForm.get('date')?.errors?.['required']">Date is required</small>
+    <small class="error" *ngIf="appointmentForm.get('date')?.errors?.['invalidDate']">Invalid date format</small>
+  </div>
   
-  <button type="submit" [disabled]="!appointmentForm.form.valid">Add Appointment</button>
+  <button type="submit" [disabled]="appointmentForm.invalid">Add Appointment</button>
 </form>

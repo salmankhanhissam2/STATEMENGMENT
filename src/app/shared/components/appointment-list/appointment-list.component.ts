@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -16,6 +15,7 @@ import { map, take } from 'rxjs/operators';
 })
 export class AppointmentListComponent implements OnInit {
   appointments$: Observable<Appointment[]>;
+  filteredAppointments: Appointment[] = [];
   allAppointments: Appointment[] = [];
   selectedDate: Date | undefined;
 
@@ -27,6 +27,7 @@ export class AppointmentListComponent implements OnInit {
     this.store.dispatch(AppointmentsActions.loadAppointments());
     this.appointments$.subscribe(appointments => {
       this.allAppointments = appointments;
+      this.filterAppointments();
     });
   }
 
@@ -46,14 +47,18 @@ export class AppointmentListComponent implements OnInit {
 
   onDateSelected(selectedDate: Date): void {
     this.selectedDate = selectedDate;
-    this.appointments$.pipe(
-      take(1),
-      map(appointments => appointments.filter(appointment => {
-        const appointmentDate = new Date(appointment.date);
-        return appointmentDate.getTime() === selectedDate.getTime();
-      }))
-    ).subscribe(filteredAppointments => {
-      console.log('Appointments for selected date:', filteredAppointments);
-    });
+    this.filterAppointments();
+  }
+
+  filterAppointments(): void {
+    if (this.selectedDate) {
+      const selectedDateString = this.selectedDate.toISOString().split('T')[0];
+      this.filteredAppointments = this.allAppointments.filter(appointment => {
+        const appointmentDate = new Date(appointment.date).toISOString().split('T')[0];
+        return appointmentDate === selectedDateString;
+      });
+    } else {
+      this.filteredAppointments = this.allAppointments;
+    }
   }
 }
