@@ -1,5 +1,3 @@
-
-
 import { createAction, props } from '@ngrx/store';
 import { Appointment } from '../shared/models/appointment.model';
 
@@ -22,4 +20,10 @@ export const deleteAppointment = createAction(
 export const updateAppointmentsOrder = createAction(
   '[Appointments] Update Appointments Order',
   props<{ appointments: Appointment[] }>()
+);
+
+
+export const updateAppointment = createAction(
+  '[Appointments] Update Appointment',
+  props<{ appointment: Appointment }>()
 );

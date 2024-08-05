@@ -6,7 +6,8 @@ import * as AppointmentsActions from '../../../store/appointments.actions';
 import { selectAllAppointments } from '../../../store/appointments.selectors';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { State } from '../../../store/appointments.reducer';
-import { map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-appointment-list',
@@ -18,6 +19,10 @@ export class AppointmentListComponent implements OnInit {
   filteredAppointments: Appointment[] = [];
   allAppointments: Appointment[] = [];
   selectedDate: Date | undefined;
+  // selectedAppointment: Appointment | null = null;
+  displayedColumns: string[] = ['id', 'title', 'date', 'actions'];
+  dataSource = new MatTableDataSource<Appointment>([]);
+  selectedAppointment: Appointment | null = null;
 
   constructor(private store: Store<State>) {
     this.appointments$ = this.store.select(selectAllAppointments);
@@ -45,6 +50,31 @@ export class AppointmentListComponent implements OnInit {
     this.store.dispatch(AppointmentsActions.deleteAppointment({ id }));
   }
 
+  editAppointment(appointment: Appointment): void {
+    this.selectedAppointment = { ...appointment };
+  }
+
+  onFormSubmitted(updatedAppointment: Appointment): void {
+    if (this.selectedAppointment) {
+      // Preserve the existing date while updating the title
+      const existingAppointment = this.selectedAppointment;
+      const updatedAppointmentWithDate: Appointment = { 
+        ...existingAppointment, 
+        title: updatedAppointment.title 
+      };
+      this.store.dispatch(AppointmentsActions.updateAppointment({ appointment: updatedAppointmentWithDate }));
+      this.selectedAppointment = null;
+    } else {
+      // Handle adding a new appointment
+      this.store.dispatch(AppointmentsActions.addAppointment({ appointment: updatedAppointment }));
+    }
+    // Ensure to refresh the appointment list after form submission
+    this.appointments$.pipe(take(1)).subscribe(appointments => {
+      this.allAppointments = appointments;
+      this.filterAppointments();
+    });
+  }
+
   onDateSelected(selectedDate: Date): void {
     this.selectedDate = selectedDate;
     this.filterAppointments();
@@ -61,5 +91,4 @@ export class AppointmentListComponent implements OnInit {
       this.filteredAppointments = this.allAppointments;
     }
   }
-  
 }

@@ -1,4 +1,3 @@
-// appointments.effects.ts
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -14,6 +13,28 @@ export class AppointmentsEffects {
       mergeMap(() =>
         this.appointmentsService.getAppointments().pipe(
           map(appointments => AppointmentsActions.loadAppointmentsSuccess({ appointments }))
+        )
+      )
+    )
+  );
+
+  addAppointment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppointmentsActions.addAppointment),
+      mergeMap(action =>
+        this.appointmentsService.addAppointment(action.appointment).pipe(
+          map(() => AppointmentsActions.loadAppointments())
+        )
+      )
+    )
+  );
+
+  updateAppointment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppointmentsActions.updateAppointment),
+      mergeMap(action =>
+        this.appointmentsService.updateAppointment(action.appointment).pipe(
+          map(() => AppointmentsActions.loadAppointments())
         )
       )
     )

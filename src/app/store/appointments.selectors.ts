@@ -1,4 +1,3 @@
-// appointments.selectors.ts
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { State } from './appointments.reducer';
 

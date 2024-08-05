@@ -1,21 +1,40 @@
+
+<div class="common-class" >
 <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
-  <label for="title">Title</label>
-  <input type="text" id="title" formControlName="title">
-  <div *ngIf="appointmentForm.get('title')?.invalid && appointmentForm.get('title')?.touched">
-    <small class="error">Title is required</small>
-  </div>
-  
-  <label for="date">Date</label>
-  <input type="date" id="date" formControlName="date">
-  <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched">
-    <small class="error" *ngIf="appointmentForm.get('date')?.errors?.['required']">Date is required</small>
-  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title">
+    <mat-error *ngIf="appointmentForm.get('title')?.invalid && (appointmentForm.get('title')?.touched || appointmentForm.get('title')?.dirty)">
+      Title is required
+    </mat-error>
+  </mat-form-field>
 
-  <label for="time">Time</label>
-  <input type="time" id="time" formControlName="time">
-  <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched">
-    <small class="error" *ngIf="appointmentForm.get('time')?.errors?.['required']">Time is required</small>
-  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Date</mat-label>
+    <input matInput type="date" formControlName="date">
+    <mat-error *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched">
+      Date is required
+    </mat-error>
+  </mat-form-field>
 
-  <button type="submit" [disabled]="appointmentForm.invalid">Add Appointment</button>
+  <mat-form-field appearance="fill">
+    <mat-label>Time</mat-label>
+    <input matInput type="time" formControlName="time">
+    <mat-error *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched">
+      Time is required
+    </mat-error>
+  </mat-form-field>
+
+  <div class="loading-container">
+    <button mat-raised-button color="primary" type="submit" [disabled]="appointmentForm.invalid || loading">
+      <ng-container *ngIf="!loading">
+        {{ appointment ? 'Update Appointment' : 'Add Appointment' }}
+      </ng-container>
+      <ng-container *ngIf="loading">
+        Processing...
+      </ng-container>
+    </button>
+    <mat-spinner *ngIf="loading" diameter="20" color="primary"></mat-spinner>
+  </div>
 </form>
+</div>

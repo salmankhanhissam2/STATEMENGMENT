@@ -1,10 +1,8 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppointmentListComponent } from './shared/components/appointment-list/appointment-list.component';
 
 const routes: Routes = [
-  { path: 'appointments', component: AppointmentListComponent },
+  { path: 'appointments', loadChildren: () => import('./appointments/appointments.module').then(m => m.AppointmentsModule) },
   { path: '', redirectTo: 'appointments', pathMatch: 'full' }
 ];
 
